@@ -1,11 +1,9 @@
-import React, { useState } from 'react';
-import { Mail, MessageCircle, Send, Instagram, Twitter, Linkedin } from 'lucide-react';
+import React from 'react';
+import { Mail, MessageCircle, Instagram, Twitter, Linkedin } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
 const Footer: React.FC = () => {
-  const [email, setEmail] = useState('');
-  const [isSubscribed, setIsSubscribed] = useState(false);
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -13,15 +11,6 @@ const Footer: React.FC = () => {
       element.scrollIntoView({ behavior: 'smooth' });
     } else {
       window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  };
-
-  const handleNewsletterSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (email) {
-      setIsSubscribed(true);
-      setEmail('');
-      setTimeout(() => setIsSubscribed(false), 3000);
     }
   };
 
@@ -53,51 +42,6 @@ const Footer: React.FC = () => {
               Pioneering the future of web development with AI-powered solutions 
               that transform businesses and drive unprecedented growth.
             </p>
-            
-            {/* Newsletter Signup */}
-            <div className="mb-8">
-              <h4 className="text-lg font-medium text-white mb-4">Stay Ahead of the Curve</h4>
-              <form onSubmit={handleNewsletterSubmit} className="relative">
-                <div className="relative">
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="w-full bg-gray-800 border border-gray-700 px-4 py-3 text-white placeholder-gray-400 focus:border-orange-500 focus:outline-none transition-all duration-300 font-light"
-                    placeholder="Enter your email"
-                  />
-                  <motion.label
-                    initial={false}
-                    animate={{
-                      top: email ? -8 : 12,
-                      fontSize: email ? '12px' : '16px',
-                      color: email ? '#FF6A00' : '#9CA3AF'
-                    }}
-                    className="absolute left-4 pointer-events-none transition-all duration-300 bg-gray-900 px-2 font-light"
-                  >
-                    {email ? 'Email Address' : ''}
-                  </motion.label>
-                </div>
-                <motion.button
-                  type="submit"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="absolute right-1 top-1 bg-orange-500 text-white p-2 hover:bg-white hover:text-orange-500 transition-all duration-300"
-                >
-                  <Send className="w-4 h-4" />
-                </motion.button>
-              </form>
-              
-              {isSubscribed && (
-                <motion.p
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="text-orange-500 text-sm mt-2 font-light"
-                >
-                  ✓ Successfully subscribed!
-                </motion.p>
-              )}
-            </div>
           </motion.div>
           
           {/* Navigation Links */}

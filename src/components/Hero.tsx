@@ -3,11 +3,10 @@ import { ArrowRight, Play } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 interface HeroProps {
-  onGetAudit: () => void;
   onViewDemos: () => void;
 }
 
-const Hero: React.FC<HeroProps> = ({ onGetAudit, onViewDemos }) => {
+const Hero: React.FC<HeroProps> = ({ onViewDemos }) => {
   const [typedText, setTypedText] = useState('');
   const fullText = 'Launch, Optimize & Scale Instantly';
 
@@ -76,7 +75,7 @@ const Hero: React.FC<HeroProps> = ({ onGetAudit, onViewDemos }) => {
           className="flex flex-col sm:flex-row gap-6 justify-center items-center"
         >
           <motion.button
-            onClick={onGetAudit}
+            onClick={() => window.location.href = '/contact'}
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             className="bg-orange-500 text-white px-8 py-4 font-medium text-lg hover:bg-white hover:text-orange-500 hover:border-orange-500 border-2 border-orange-500 transition-all duration-300 flex items-center gap-3 shadow-lg"

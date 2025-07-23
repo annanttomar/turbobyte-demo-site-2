@@ -2,11 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-interface NavbarProps {
-  onContactClick: () => void;
-}
+interface NavbarProps {}
 
-const Navbar: React.FC<NavbarProps> = ({ onContactClick }) => {
+const Navbar: React.FC<NavbarProps> = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
@@ -16,11 +14,43 @@ const Navbar: React.FC<NavbarProps> = ({ onContactClick }) => {
       setIsScrolled(window.scrollY > 50);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const handleSectionDetection = () => {
+      const sections = ['home', 'services', 'portfolio', 'pricing'];
+      const scrollPosition = window.scrollY + 200; // Offset for better detection
+      
+      let currentSection = 'home';
+      
+      for (const sectionId of sections) {
+        const section = document.getElementById(sectionId);
+        if (section && section.offsetTop <= scrollPosition) {
+          currentSection = sectionId;
+        }
+      }
+      
+      setActiveSection(currentSection);
+    };
+
+    const scrollHandler = () => {
+      handleScroll();
+      requestAnimationFrame(handleSectionDetection);
+    };
+
+    window.addEventListener('scroll', scrollHandler, { passive: true });
+    
+    // Initial check on mount
+    handleScroll();
+    handleSectionDetection();
+    
+    return () => window.removeEventListener('scroll', scrollHandler);
   }, []);
 
   const scrollToSection = (sectionId: string) => {
+    if (sectionId === 'contact') {
+      // Redirect to contact page
+      window.location.href = '/contact';
+      return;
+    }
+    
     setActiveSection(sectionId);
     setIsMobileMenuOpen(false);
     const element = document.getElementById(sectionId);
@@ -75,7 +105,12 @@ const Navbar: React.FC<NavbarProps> = ({ onContactClick }) => {
                     layoutId="activeSection"
                     className="absolute -bottom-1 left-0 right-0 h-0.5 bg-orange-500 rounded-full"
                     initial={false}
-                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    transition={{ 
+                      type: "spring", 
+                      stiffness: 500, 
+                      damping: 35,
+                      duration: 0.3
+                    }}
                   />
                 )}
               </motion.button>
@@ -84,7 +119,7 @@ const Navbar: React.FC<NavbarProps> = ({ onContactClick }) => {
 
           {/* CTA Button */}
           <motion.button
-            onClick={onContactClick}
+            onClick={() => window.location.href = '/contact'}
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             className="hidden md:block bg-orange-500 text-white px-6 py-2 font-medium hover:bg-white hover:text-orange-500 hover:border-orange-500 border-2 border-orange-500 transition-all duration-300"
@@ -124,7 +159,7 @@ const Navbar: React.FC<NavbarProps> = ({ onContactClick }) => {
                 </motion.button>
               ))}
               <motion.button
-                onClick={onContactClick}
+                onClick={() => window.location.href = '/contact'}
                 whileHover={{ scale: 1.02 }}
                 className="w-full bg-orange-500 text-white py-3 font-medium mt-4 hover:bg-white hover:text-orange-500 hover:border-orange-500 border-2 border-orange-500 transition-all duration-300"
               >
