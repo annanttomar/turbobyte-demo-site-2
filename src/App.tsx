@@ -11,6 +11,7 @@ import StickyContact from './components/StickyContact';
 import Footer from './components/Footer';
 import CookieBanner from './components/CookieBanner';
 import { Routes, Route } from 'react-router-dom';
+import AboutUs from './components/AboutUs';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import TermsOfService from './components/TermsOfService';
 import Disclaimer from './components/Disclaimer';
@@ -149,6 +150,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<MainSite />} />
+      <Route path="/about-us" element={<AboutUs />} />
       <Route path="/privacy-policy" element={<PrivacyPolicy />} />
       <Route path="/terms-of-service" element={<TermsOfService />} />
       <Route path="/disclaimer" element={<Disclaimer />} />

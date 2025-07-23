@@ -148,6 +148,7 @@ const Footer: React.FC = () => {
               © 2025 TurboBytes. All rights reserved.
             </p>
             <div className="flex justify-center space-x-6 mt-8">
+              <Link to="/about-us" className="text-gray-400 hover:text-orange-500 transition-all duration-300">About Us</Link>
               <Link to="/privacy-policy" className="text-gray-400 hover:text-orange-500 transition-all duration-300">Privacy Policy</Link>
               <Link to="/terms-of-service" className="text-gray-400 hover:text-orange-500 transition-all duration-300">Terms of Service</Link>
               <Link to="/disclaimer" className="text-gray-400 hover:text-orange-500 transition-all duration-300">Disclaimer</Link>
