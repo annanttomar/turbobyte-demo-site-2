@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -6,7 +6,6 @@ import Services from './components/Services';
 import Portfolio from './components/Portfolio';
 import Pricing from './components/Pricing';
 import Testimonials from './components/Testimonials';
-import ContactModal from './components/ContactModal';
 import StickyContact from './components/StickyContact';
 import Footer from './components/Footer';
 import CookieBanner from './components/CookieBanner';
@@ -19,8 +18,7 @@ import ShippingPolicy from './components/ShippingPolicy';
 import RefundCancellationPolicy from './components/RefundCancellationPolicy';
 import ContactPage from './components/ContactPage';
 
-function MainSite(props: any) {
-  const [activeModal, setActiveModal] = useState<string | null>(null);
+function MainSite() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -34,12 +32,6 @@ function MainSite(props: any) {
       document.documentElement.style.scrollBehavior = 'auto';
     };
   }, []);
-
-  // Modal handlers
-  const handleGetAudit = () => setActiveModal('audit');
-  const handleRequestQuote = () => setActiveModal('quote');
-  const handleTalkToExpert = () => setActiveModal('expert');
-  const handleCloseModal = () => setActiveModal(null);
 
   // Smooth scroll to section
   const scrollToSection = (sectionId: string) => {
@@ -91,11 +83,11 @@ function MainSite(props: any) {
       className="min-h-screen bg-white overflow-x-hidden"
     >
       {/* Navigation */}
-      <Navbar onContactClick={handleTalkToExpert} />
+      <Navbar />
 
       {/* Hero Section */}
       <section id="home">
-        <Hero onGetAudit={handleGetAudit} onViewDemos={handleViewDemos} />
+        <Hero onViewDemos={handleViewDemos} />
       </section>
 
       {/* Services Section */}
@@ -105,7 +97,7 @@ function MainSite(props: any) {
       <Portfolio />
 
       {/* Pricing Section */}
-      <Pricing onRequestQuote={handleRequestQuote} />
+      <Pricing />
 
       {/* Testimonials Section */}
       <Testimonials />
@@ -116,29 +108,7 @@ function MainSite(props: any) {
       </section>
 
       {/* Sticky Contact Button */}
-      <StickyContact onClick={handleTalkToExpert} />
-
-      {/* Contact Modals */}
-      <ContactModal
-        isOpen={activeModal === 'audit'}
-        onClose={handleCloseModal}
-        title="Get a Free Audit"
-        type="audit"
-      />
-      
-      <ContactModal
-        isOpen={activeModal === 'quote'}
-        onClose={handleCloseModal}
-        title="Request a Quote"
-        type="quote"
-      />
-      
-      <ContactModal
-        isOpen={activeModal === 'expert'}
-        onClose={handleCloseModal}
-        title="Talk to an Expert"
-        type="audit"
-      />
+      <StickyContact />
 
       {/* Cookie Banner */}
       <CookieBanner />

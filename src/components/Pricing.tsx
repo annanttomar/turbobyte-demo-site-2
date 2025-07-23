@@ -2,11 +2,7 @@ import React from 'react';
 import { Star } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-interface PricingProps {
-  onRequestQuote: () => void;
-}
-
-const Pricing: React.FC<PricingProps> = ({ onRequestQuote }) => {
+const Pricing: React.FC = () => {
   return (
     <section id="pricing" className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-6">
